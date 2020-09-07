@@ -64,7 +64,7 @@ class BaseReporter(object):
     def end_generation(self, config, population, species_set):
         pass
 
-    def post_evaluate(self, config, population, species, best_genome):
+    def post_evaluate(self, config, population, species, best_genome, score_max, score_mean):
         pass
 
     def post_reproduction(self, config, population, species):

@@ -95,7 +95,7 @@ class Population(object):
 
                 if best is None or g.fitness > best.fitness:
                     best = g
-            self.reporters.post_evaluate(self.config, self.population, self.species, best)
+            self.reporters.post_evaluate(self.config, self.population, self.species, best, score_max, score_mean)
 
             # Track the best genome ever seen.
             if self.best_genome is None or best.fitness > self.best_genome.fitness:

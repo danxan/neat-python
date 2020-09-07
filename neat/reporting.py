@@ -31,9 +31,9 @@ class ReporterSet(object):
         for r in self.reporters:
             r.end_generation(config, population, species_set)
 
-    def post_evaluate(self, config, population, species, best_genome):
+    def post_evaluate(self, config, population, species, best_genome, score_max, score_mean):
         for r in self.reporters:
-            r.post_evaluate(config, population, species, best_genome)
+            r.post_evaluate(config, population, species, best_genome, score_max, score_mean)
 
     def post_reproduction(self, config, population, species):
         for r in self.reporters:
@@ -126,11 +126,15 @@ class StdOutReporter(BaseReporter):
         else:
             print("Generation time: {0:.3f} sec".format(elapsed))
 
-    def post_evaluate(self, config, population, species, best_genome):
+    def post_evaluate(self, config, population, species, best_genome, score_max, score_mean):
         # pylint: disable=no-self-use
         fitnesses = [c.fitness for c in population.values()]
         fit_mean = mean(fitnesses)
         fit_std = stdev(fitnesses)
+
+        score_max.append(max(fitnesses))
+        score_mean.append(fit_mean)
+
         best_species_id = species.get_species_id(best_genome.key)
         print('Population\'s average fitness: {0:3.5f} stdev: {1:3.5f}'.format(fit_mean, fit_std))
         print(

@@ -22,7 +22,7 @@ class StatisticsReporter(BaseReporter):
         self.most_fit_genomes = []
         self.generation_statistics = []
 
-    def post_evaluate(self, config, population, species, best_genome):
+    def post_evaluate(self, config, population, species, best_genome, score_max, score_mean):
         self.most_fit_genomes.append(copy.deepcopy(best_genome))
 
         # Store the fitnesses of the members of each currently active species.
